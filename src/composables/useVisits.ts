@@ -12,7 +12,7 @@ export function useVisits() {
 
 	const { data: visits } = useRequest(async function () {
 		try {
-			const n = await http.get('https://visits-kv.deno.dev/tov-template', {
+			const n = await http.get('https://httpbin.org/', {
 				baseURL: '',
 			})
 			return Number(n) ?? 0

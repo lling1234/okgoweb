@@ -5,7 +5,6 @@ const visiable = ref(false)
 function dropdownHandler() {
 	visiable.value = false
 }
-
 const { availableLocales, locale } = useI18n()
 </script>
 
