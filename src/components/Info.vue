@@ -1,57 +1,54 @@
-<!-- 热门推荐 -->
 <template>
-	<section class="index-recommend-hot-outer">
-		<div class="i-r-t-inner">
-			<div class="i-r-title">
-				<div class="i-r-title-line"><i class="right i-r-title-icon"></i></div>
-				<h1>热门推荐</h1>
-				<div class="i-r-title-line"><i class="i-r-title-icon left"></i></div>
-			</div>
-
-			<div id="recommendHotWrap">
-				<ul class="i-r-t-hotel-group">
-					<div class="flex flex-wrap">
-						<div v-for="(item, index) in items" :key="index" class="w-1/3 p-4">
-							{{ item.id }}{{ item.name }}
-						</div>
-					</div>
-				</ul>
-
-				<ul class="i-r-t-hotel-group">
-					<div class="flex flex-wrap">
-						<div v-for="(item, index) in items" :key="index" class="w-1/3 p-4">
-							{{ item }}
-						</div>
-					</div>
-				</ul>
-
-				<ul class="i-r-t-hotel-group">
-					<div class="flex flex-wrap">
-						<div v-for="(item, index) in items" :key="index" class="w-1/3 p-4">
-							{{ item }}
-						</div>
-					</div>
-				</ul>
-
-				<!-- <div class="i-recommend-btn">
-            <a class="bottom-one" style="display:none;">查看全部<i class="i-check-more-icon"></i></a>
-        </div> -->
-			</div>
-		</div>
-	</section>
+	<div>
+		<ul>
+			<li v-for="item in dataList" :key="item.id" @click="goToLink(item.link)">
+				{{ item.title }}
+			</li>
+		</ul>
+	</div>
 </template>
 
-<script lang="ts" setup>
-interface Item {
-	id: number
-	name: string
-}
-// 使用reactive创建响应式数组
-const items = ref<Item[]>([
-	{ id: 1, name: 'Apple1' },
-	{ id: 2, name: 'Banana1' },
-	{ id: 3, name: 'Orange1' },
-])
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { Datum2, Datum } from '@/stores/rootObject' // 假设你的类型定义文件是types.ts
+
+export default defineComponent({
+	name: 'MyComponent',
+	data() {
+		return {
+			dataList: [] as Datum[],
+		}
+	},
+	mounted() {
+		this.fetchData()
+	},
+	methods: {
+		fetchData() {
+			http
+				.get('/hot/list?type=0')
+				.then((response) => {
+					console.log('1111')
+					console.log(response)
+					console.log('sss')
+					console.log(response.data)
+					const data: Datum2[] = response.data
+					console.log('ddd')
+					console.log(data[0])
+					const dataInfo: Datum[] = data[0].data
+					console.log('2222')
+					console.log(dataInfo)
+					this.dataList = dataInfo // 假设你只需要第一个data的内容
+				})
+				.catch((error) => {
+					console.error(error)
+				})
+		},
+		goToLink(link: string) {
+			// 使用Vue Router进行页面跳转
+			window.open(link, '_blank')
+		},
+	},
+})
 </script>
 
 <!-- <style scoped lang="scss">
