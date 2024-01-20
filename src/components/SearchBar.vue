@@ -1,52 +1,51 @@
 <template>
-    <Search style=" height: 2em; margin-right: 1px" />
-    <div class="search-bar">
-        <input type="text" v-model="searchText" @keydown.enter="openBingSearch">
-    </div>
+  <Search style="height: 2em; margin-right: 1px" />
+  <div class="search-bar">
+    <input v-model="searchText" type="text" @keydown.enter="openBingSearch" />
+  </div>
 </template>
-  
+
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-    data() {
-        return {
-            searchText: '',
-        };
-    },
-    methods: {
-        openBingSearch() {
-            const query = encodeURIComponent(this.searchText);
-            const url = `/bing/search?q=${query}`;
+  data() {
+    return {
+      searchText: '',
+    }
+  },
+  methods: {
+    openBingSearch() {
+      const query = encodeURIComponent(this.searchText)
+      const url = `/bing/search?q=${query}`
 
-            window.open(url, '_blank');
-        },
+      window.open(url, '_blank')
     },
-});
+  },
+})
 </script>
-  
+
 <style scoped>
 .search-bar {
-    display: flex;
-    align-items: center;
-    width: 165px;
-    height: 40px;
-    /* border: 1px solid #ccc; */
-    border-radius: 14px;
-    /* padding: 0 10px; */
+  display: flex;
+  align-items: center;
+  width: 165px;
+  height: 40px;
+  /* border: 1px solid #ccc; */
+  border-radius: 14px;
+  /* padding: 0 10px; */
 }
 
-input[type="text"] {
-    /* flex: 1; */
-    border: none;
-    outline: none;
-    font-size: 5px;
-    border-radius: 5px;
+input[type='text'] {
+  /* flex: 1; */
+  border: none;
+  outline: none;
+  font-size: 5px;
+  border-radius: 5px;
 }
 
 .fa-search {
-    color: #0b0b0b;
-    cursor: pointer;
+  color: #0b0b0b;
+  cursor: pointer;
 }
 </style>
-  
