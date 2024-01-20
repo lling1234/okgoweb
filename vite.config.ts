@@ -15,6 +15,15 @@ export default defineConfig({
 					return path.replace(/^\/api/, '')
 				},
 			},
+			'/bing': {
+				target: 'https://bing.com',
+				secure: false,
+				changeOrigin: true, //this one is declare for cross
+				rewrite: (path) => {
+					console.log(path)
+					return path.replace(/^\/bing/, '')
+				},
+			},
 		},
 	},
 })

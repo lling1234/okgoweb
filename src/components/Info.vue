@@ -1,11 +1,24 @@
 <template>
-	<div>
-		<ul>
-			<li v-for="item in dataList" :key="item.id" @click="goToLink(item.link)">
-				{{ item.title }}
-			</li>
-		</ul>
-	</div>
+    <div v-for="item of 12" :key="item" class="container">
+        <div>
+            <p>11</p>
+        </div>
+        <div>
+            <div>
+                <ul>
+                    <li v-for="item in dataList" :key="item.id" @click="goToLink(item.link)">
+                        {{ item.title }}--{{ item.extra }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="floating-container" style="z-index: 6;">
+        <span>1111</span>
+        <!-- 悬浮容器的内容 -->
+    </div>
 </template>
 
 <script lang="ts">
@@ -13,111 +26,81 @@ import { defineComponent } from 'vue'
 import { Datum2, Datum } from '@/stores/rootObject' // 假设你的类型定义文件是types.ts
 
 export default defineComponent({
-	name: 'MyComponent',
-	data() {
-		return {
-			dataList: [] as Datum[],
-		}
-	},
-	mounted() {
-		this.fetchData()
-	},
-	methods: {
-		fetchData() {
-			http
-				.get('/hot/list?type=0')
-				.then((response) => {
-					console.log('1111')
-					console.log(response)
-					console.log('sss')
-					console.log(response.data)
-					const data: Datum2[] = response.data
-					console.log('ddd')
-					console.log(data[0])
-					const dataInfo: Datum[] = data[0].data
-					console.log('2222')
-					console.log(dataInfo)
-					this.dataList = dataInfo // 假设你只需要第一个data的内容
-				})
-				.catch((error) => {
-					console.error(error)
-				})
-		},
-		goToLink(link: string) {
-			// 使用Vue Router进行页面跳转
-			window.open(link, '_blank')
-		},
-	},
+    name: 'MyComponent',
+    data() {
+        return {
+            dataList: [] as Datum[],
+        }
+    },
+    mounted() {
+        this.fetchData()
+    },
+    methods: {
+        fetchData() {
+            http
+                .get('/hot/list?type=0')
+                .then((response) => {
+                    const data: Datum2[] = response.data
+                    const dataInfo: Datum[] = data[0].data
+                    this.dataList = dataInfo // 假设你只需要第一个data的内容
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+        },
+        goToLink(link: string) {
+            // 使用Vue Router进行页面跳转
+            window.open(link, '_blank')
+        },
+    },
 })
 </script>
 
-<!-- <style scoped lang="scss">
-// 热门推荐
-
-.index-recommend-hot-outer{
-    background: white;
-    margin-bottom: -20px;
-
-    @at-root #recommendHotWrap{
-        min-height: 570px;
-    }
-
-    @at-root .i-r-h-hotel-item{
-        float: left;
-        width: 386px;
-        height: 220px;
-        margin: 0 20px 20px 0;
-        transition: all .2s linear;
-
-        &:hover{
-            box-shadow: 0 0 10px rgba(82, 80, 84, .9);
-            transform: translate3d(-2px, -2px, 0)
-        }
-
-        @at-root .irh-bottom-line-mask{
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 50px;
-            width: 100%;
-            background: black;
-            opacity: .6;
-            filter: Alpha(opacity=60);
-
-        }
-
-        @at-root .irh-bottom-line{
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 365px;
-            height: 50px;
-            line-height: 50px;
-            margin: 0 10px;
-            transform: translateZ(0);
-
-            b{
-                color: white;
-                font-size: 18px;
-            }
-
-            @at-root .irh-price-wrap{
-                float: right;
-                font-size: 12px;
-                background: orange;
-                color: white;
-                height: 36px;
-                line-height: 36px;
-                border-radius: 5px;
-                width: 100px;
-                text-align: center;
-                margin-top: 7px;
-            }
-
-            @at-root .irh-price-num{
-                font-size: 20px;
-            }
-        }
-    }
+<style scoped>
+.container {
+    display: inline-block;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 356px;
+    height: 320px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: background-color .3s;
 }
-</style> -->
+
+.item {
+    width: 30%;
+    height: 100px;
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+}
+
+.item:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.floating-container {
+    position: fixed;
+    /* 使用固定定位 */
+    top: 56%;
+    /* 距离顶部的距离 */
+    right: 10px;
+    /* 距离右侧的距离 */
+    transform: translateY(-50%);
+    /* 上下居中对齐 */
+    width: 290px;
+    height: 640px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+
+}
+</style>
