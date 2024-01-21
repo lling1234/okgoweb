@@ -3,12 +3,15 @@
 	<!-- <div class="w-screen flex flex-col items-center justify-center"> -->
 	<div >
 		<Info />
+		<!-- <ScrollTop /> -->
+		<!-- <DataTest /> -->
 		<router-view v-slot="{ Component }">
 			<transition name="fade" mode="out-in">
 				<component :is="Component" />
 			</transition>
 		</router-view>
 	</div>
+	<el-backtop :right="100" :bottom="100" />
 </template>
 
 <style>

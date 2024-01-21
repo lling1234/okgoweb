@@ -24,6 +24,15 @@ export default defineConfig({
 					return path.replace(/^\/bing/, '')
 				},
 			},
+			'/top': {
+				target: 'https://momoyu.cc/api/hot/top',
+				secure: false,
+				changeOrigin: true, //this one is declare for cross
+				rewrite: (path) => {
+					console.log(path)
+					return path.replace(/^\/top/, '')
+				},
+			},
 		},
 	},
 })

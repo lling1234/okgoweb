@@ -29,11 +29,11 @@ export default defineComponent({
 .search-bar {
   display: flex;
   align-items: center;
-  width: 165px;
-  height: 40px;
-  /* border: 1px solid #ccc; */
-  border-radius: 14px;
-  /* padding: 0 10px; */
+  width: 155px;
+  height: 22px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
 }
 
 input[type='text'] {

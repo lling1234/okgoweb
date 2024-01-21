@@ -48,7 +48,7 @@ const routes = getRoutes()
             background: #00dc8220;
             font-size: 13px;
           "
-          >好狗肉
+          >欧狗铺
         </span>
       </a>
     </div>
