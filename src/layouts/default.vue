@@ -1,27 +1,36 @@
 <template>
 	<Navigation />
-	<!-- <div class="w-screen flex flex-col items-center justify-center"> -->
 	<div >
-		<Info />
-		<!-- <ScrollTop /> -->
-		<!-- <DataTest /> -->
 		<router-view v-slot="{ Component }">
 			<transition name="fade" mode="out-in">
 				<component :is="Component" />
 			</transition>
 		</router-view>
 	</div>
-	<el-backtop :right="100" :bottom="100" />
 </template>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-	transition: opacity 0.25s ease;
+a {
+	color: rgba(37, 99, 235);
 }
 
-.fade-enter-from,
-.fade-leave-to {
-	opacity: 0;
+p {
+	padding: 0 10px;
+}
+
+.logo {
+	width: 10em;
+	height: 10em;
+	padding: 1.5rem;
+	will-change: filter;
+	transition: filter 300ms;
+}
+
+.logo:hover {
+	filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.vue:hover {
+	filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
