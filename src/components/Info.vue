@@ -13,8 +13,6 @@
             indext + 1 }}. </span>
           <span class="item-title" style="text-align: left;" :title=item.title>{{ item.title }}</span>
           <span class="item-extra">{{ item.extra }}</span>
-
-
         </li>
       </ul>
     </div>
