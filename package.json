@@ -1,7 +1,7 @@
 {
   "name": "tov-template",
   "version": "1.18.1",
-  "description": "vite + vue3 + ts 开箱即用现代开发模板",
+  "description": "okgoweb",
   "type": "module",
   "scripts": {
     "dev": "vite",
